@@ -1,2 +1,5 @@
 <?php
-echo sprintf('Selamat Datang, %s', $_GET['nama']);
+use Symfony\Component\HttpFoundation\Response;
+$response = new Response();
+$response->setContent(sprintf('Selamat Datang, %s', $request>get('nama')));
+$response->send();
