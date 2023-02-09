@@ -2,16 +2,24 @@
 require __DIR__.'/vendor/autoload.php';
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\RouteCollection;
+use Symfony\Component\Routing\Route;
+use Symfony\Component\Routing\RequestContext;
+use Symfony\Component\Routing\Matcher\UrlMatcher;
+use Symfony\Component\Routing\Exception\ResourceNotFoundException;
 $request = Request::createFromGlobals();
-$path = $request->getPathInfo();
+$routes = new RouteCollection();
+$routes->add('hello', new Route('/hello'));
+$routes->add('greeting', new Route('/greeting/{nama}', ['nam
+a' => 'Surya']));
+$context = new RequestContext();
+$context->fromRequest($request);
+$matcher = new UrlMatcher($routes, $context);
+try {
 $response = new Response();
-$route = ['/hello' => 'hello.php', '/greeting' => 'greeting.php'];
-if (isset($route[$path])) {
-include $route[$path];
-}else {
-    $response->setContent('<h1 style="font-size:80px; color:red; display:flex; justify-content:center;">404<h1><br><h1 style="display:flex; justify-content:center;">Page Not Found<h1>');
-    $response->setStatusCode(Response::HTTP_NOT_FOUND);
-    }
-    
-
+extract($matcher->match($request->getPathInfo()));
+include sprintf('%s.php', $_route);
+} catch (ResourceNotFoundException $e) {
+$response = new Response('Halaman tidak ditemukan', Response::HTTP_NOT_FOUND);
+}
 $response->send();
