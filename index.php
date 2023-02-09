@@ -7,3 +7,5 @@ $route = ['/hello' => 'hello.php', '/greeting' => 'greeting.php'];
 if (isset($route[$path])) {
 include $route[$path];
 }
+
+$response->send();
