@@ -10,8 +10,7 @@ use Symfony\Component\Routing\Exception\ResourceNotFoundException;
 $request = Request::createFromGlobals();
 $routes = new RouteCollection();
 $routes->add('hello', new Route('/hello'));
-$routes->add('greeting', new Route('/greeting/{nama}', ['nam
-a' => 'Surya']));
+$routes->add('greeting', new Route('/greeting/{nama}', ['nama' => 'Surya']));
 $context = new RequestContext();
 $context->fromRequest($request);
 $matcher = new UrlMatcher($routes, $context);
