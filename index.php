@@ -11,7 +11,7 @@ $request = Request::createFromGlobals();
 $routes = new RouteCollection();
 $routes->add('hello', new Route('/hello'));
 $routes->add('greeting', new Route('/greeting/{nama}', ['nama' => 'Surya']));
-$routes->add('landing', new Route('/', ['nama'=>'rokan']));
+$routes->add('landing', new Route('/{nama}', ['nama'=>'rokan']));
 $context = new RequestContext();
 $context->fromRequest($request);
 $matcher = new UrlMatcher($routes, $context);
