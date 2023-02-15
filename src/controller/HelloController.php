@@ -4,6 +4,10 @@ namespace ModernFramework\Controller;
 use Symfony\Component\HttpFoundation\Response;
 
 class HelloController{
+    public function landing($nama){
+        return new Response("Hallo $nama");
+    }
+
     public function hello(){
         return new Response('Hello World');
     }
