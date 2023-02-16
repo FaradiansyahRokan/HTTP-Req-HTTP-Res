@@ -8,4 +8,6 @@ $routes->add('greeting', new Route('/greeting/{nama}', [
     'nama' => 'Surya','_controller' => 'ModernFramework\Controller\HelloController::greet',
 ]));
     
-$routes->add('landing', new Route('/{nama}', ['nama'=>'rokan']));
+$routes->add('landing', new Route('/{nama}', ['nama'=>'rokan', '_controller' => 'ModernFramework\Controller\HelloController::landing']));
+
+$routes->add('produk', new Route(('/p/prouk')));
